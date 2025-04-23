@@ -1,4 +1,3 @@
-import HeroSection from "../components/common/HeroSection";
 import FoodSearchAndResults from "../components/FoodSearchandResults";
 import { ErrorBoundary } from "react-error-boundary";
 
@@ -11,16 +10,15 @@ const ErrorFallback = () => {
   );
 };
 
-const HomePage = () => {
+const Browse = () => {
   return (
-    <div className="mx-auto px-4 py-8">
-      <HeroSection />
+    <div className="md:p-3 sm:p-3">
       <ErrorBoundary FallbackComponent={ErrorFallback}>
-        <FoodSearchAndResults pageSize={12} useInfiniteScroll={false} />
-        {/* <FoodSearchAndResults Page_size={10} /> */}
+        <FoodSearchAndResults pageSize={12} useInfiniteScroll={true} />
+        {/* <FoodSearchAndResults Page_size={17} /> */}
       </ErrorBoundary>
     </div>
   );
 };
 
-export default HomePage;
+export default Browse;

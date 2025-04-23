@@ -1,4 +1,5 @@
 import axios from "axios";
+import {  FoodSearchResponse } from "../types/Food";
 
 const API_KEY = "qcvl1acoah0Lix4Z7HRdVazNrUhfh0bqNP2sPnxS";
 
@@ -9,7 +10,7 @@ const axiosInstance = axios.create({
   },
 });
 
-export const getAllFoods = async () => {
+export const getAllFoods = async (): Promise<FoodSearchResponse> => {
   const res = await axiosInstance.get(`/foods/search?api_key=${API_KEY}`, {
     params: { pageSize: 50 },
   });
@@ -17,25 +18,10 @@ export const getAllFoods = async () => {
   return res.data;
 };
 
-interface Food {
-  fdcId: string;
-  description?: string;
-  brandOwner?: string;
-  foodCategory?: string;
-}
-
-interface ApiResponse {
-  foods: Food[];
-  totalHits: number;
-  currentPage: number;
-  totalPages: number;
-  pageSize: number;
-}
-
 export const getFoods = async (
   pageNumber = 1,
   pageSize = 25
-): Promise<ApiResponse> => {
+): Promise<FoodSearchResponse> => {
   const res = await axiosInstance.get(`/foods/search?api_key=${API_KEY}`, {
     params: {
       pageSize,
@@ -56,7 +42,7 @@ export const searchFoods = async (
   query: string,
   pageNumber = 1,
   pageSize = 25
-): Promise<ApiResponse> => {
+): Promise<FoodSearchResponse> => {
   const res = await axiosInstance.get(`/foods/search?api_key=${API_KEY}`, {
     params: {
       query,

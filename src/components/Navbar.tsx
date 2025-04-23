@@ -19,14 +19,14 @@ const Navbar = () => {
     setIsSearchOpen(!isSearchOpen);
   };
   return (
-    <nav className="bg-white shadow-sm sticky top-0 z-50 bg-gradient-to-r from-green-50 to-green-100">
+    <nav className=" shadow-sm sticky top-0 z-50 bg-[#F1F5F9]">
       <div className="w-full mx-auto flex items-center justify-between lg:px-8 py-4 sm:px-8">
         <div className="flex items-center lg:space-x-4">
           <Leaf
-            className="text-green-600 mr-2 group-hover:text-green-700 transition-colors"
+            className="text-[#4292C6] mr-2 group-hover:text-[#2171B5] transition-colors"
             size={24}
           />
-          <span className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-green-600 to-green-500 font-serif">
+          <span className="text-2xl font-bold bg-clip-text text-transparent bg-[#08519C] ">
             NutriFind
           </span>
 
@@ -39,13 +39,13 @@ const Navbar = () => {
                   onChange={(e) => setSearchQuery(e.target.value)}
                   placeholder="Search..."
                   autoFocus
-                  className=" rounded-lg py-1 px-3 focus:outline-none focus:ring-2 focus:ring-green-500"
+                  className=" rounded-lg py-1 px-3 focus:outline-none focus:ring-2 focus:ring-[#4292C6]"
                 />
               )}
 
               <button
                 type="submit"
-                className="ml-2 hover:text-gray-200 bg-green-500 text-white p-2 rounded-full hover:bg-green-600 transition-colors"
+                className="ml-2 hover:text-gray-200 bg-[#08519C] text-white p-2 rounded-full hover:bg-[#08306B] transition-colors"
               >
                 <Search size={20} onClick={handleSearchOpen} />
               </button>
@@ -65,8 +65,8 @@ const Navbar = () => {
             <span
               className={`text-gray-600 text-lg transition-all duration-300 ${
                 path === "/"
-                  ? "text-green-500 font-bold"
-                  : "text-gray-600 hover:text-green-500"
+                  ? "text-[#4292C6] font-bold underline underline-offset-4"
+                  : "text-gray-600 hover:text-[#4292C6] hover:underline underline-offset-4 decoration-2"
               }`}
             >
               Home
@@ -76,8 +76,8 @@ const Navbar = () => {
             <span
               className={`text-gray-600 text-lg transition-all duration-300 ${
                 path === "/browse"
-                  ? "text-green-500 font-bold"
-                  : "text-gray-600 hover:text-green-500"
+                  ? "text-[#4292C6] font-bold underline underline-offset-4"
+                  : "text-gray-600 hover:text-[#4292C6] hover:underline underline-offset-4 decoration-2"
               }`}
             >
               Browse
@@ -90,8 +90,8 @@ const Navbar = () => {
             <span
               className={`text-gray-600 text-lg transition-all duration-300 ${
                 path === "/favorites"
-                  ? "text-green-500 font-bold"
-                  : "text-gray-600 hover:text-green-500"
+                  ? "text-[#4292C6] font-bold underline underline-offset-4"
+                  : "text-gray-600 hover:text-[#4292C6] hover:underline underline-offset-4 decoration-2"
               }`}
             >
               Favorites
@@ -101,8 +101,8 @@ const Navbar = () => {
             <span
               className={`text-gray-600 text-lg transition-all duration-300 ${
                 path === "/about"
-                  ? "text-green-500 font-bold"
-                  : "text-gray-600 hover:text-green-500"
+                  ? "text-[#4292C6] font-bold underline underline-offset-4"
+                  : "text-gray-600 hover:text-[#4292C6] hover:underline underline-offset-4 decoration-2"
               }`}
             >
               About

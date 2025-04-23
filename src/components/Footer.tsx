@@ -4,27 +4,27 @@ import { useState } from "react";
 function Footer() {
   const [follow, setFollow] = useState("+Follow");
   return (
-    <footer className="bg-white text-gray-400 font-medium py-6 px-4 sm:px-6 lg:px-8 mt-auto bg-gradient-to-r from-green-50 to-green-100 shadow-[0_-4px_6px_-4px_rgba(0,0,0,0.2)]">
+    <footer className=" text-gray-400 font-medium py-6 px-4 sm:px-6 lg:px-8 mt-auto bg-[#F1F5F9] ">
       <div className="flex flex-col md:flex-row border-b border-gray-300 justify-between items-center py-4  mx-auto px-4">
         <div>
           <h1>Get connected us on social media</h1>
         </div>
         <div className="flex space-x-4">
-          <Facebook className="w-5 h-5 hover:text-green-500 hover:scale-110 transition-all duration-300 ease-out" />
-          <Twitter className="w-5 h-5 hover:text-green-500 hover:scale-110 transition-all duration-300 ease-out" />
-          <Instagram className="w-5 h-5 hover:text-green-500 hover:scale-110 transition-all duration-300 ease-out" />
-          <X className="w-5 h-5 hover:text-green-500 hover:scale-110 transition-all duration-300 ease-out" />
-          <Github className="w-5 h-5 hover:text-green-500 hover:scale-110 transition-all duration-300 ease-out" />
+          <Facebook className="w-5 h-5 hover:text-[#4292C6] hover:scale-110 transition-all duration-300 ease-out" />
+          <Twitter className="w-5 h-5 hover:text-[#4292C6] hover:scale-110 transition-all duration-300 ease-out" />
+          <Instagram className="w-5 h-5 hover:text-[#4292C6] hover:scale-110 transition-all duration-300 ease-out" />
+          <X className="w-5 h-5 hover:text-[#4292C6] hover:scale-110 transition-all duration-300 ease-out" />
+          <Github className="w-5 h-5 hover:text-[#4292C6] hover:scale-110 transition-all duration-300 ease-out" />
         </div>
       </div>
       <div className="border-b border-gray-300 flex flex-col lg:flex-row flex-wrap justify-between px-4 sm:px-6 lg:px-8 items-start gap-6 mt-4">
         <div className="pb-4 w-full sm:w-1/2 lg:w-1/4 px-2 break-normal">
           <h1 className="flex items-center text-lg font-bold mt-4">
             <Leaf
-              className="text-green-600 mr-2 group-hover:text-green-700 transition-colors"
+              className="text-[#4292C6] mr-2 group-hover:text-[#2171B5] transition-colors"
               size={24}
             />
-            <span className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-green-600 to-green-500 font-serif">
+            <span className="text-2xl font-bold bg-clip-text text-transparent bg-[#08519C] ">
               NutriFind
             </span>
           </h1>
