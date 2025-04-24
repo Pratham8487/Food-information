@@ -122,9 +122,6 @@ const FoodSearchAndResults = ({
     totalPages = query.data?.totalPages || 0;
   }
 
-  // if (isPending)
-  //   return <div className="flex justify-center p-8">Loading data...</div>;
-
   if (isPending) {
     return (
       <div className="bg-white shadow-xs rounded-xl overflow-hidden p-4">
@@ -140,7 +137,7 @@ const FoodSearchAndResults = ({
       </div>
     );
   }
-
+  console.log(currentData, "data----------");
   if (error)
     return (
       <div className="flex justify-center p-8 text-red-500">
@@ -189,11 +186,7 @@ const FoodSearchAndResults = ({
         <>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
             {currentData.foods.map((food) => (
-              <FoodCard
-                key={food.fdcId}
-                food={food}
-                onClick={() => console.log(food.fdcId)}
-              />
+              <FoodCard key={food.fdcId} food={food} />
             ))}
           </div>
 
@@ -202,7 +195,23 @@ const FoodSearchAndResults = ({
               {(isSearching
                 ? searchResultsInfiniteQuery
                 : allFoodsInfiniteQuery
-              ).isFetchingNextPage && <p>Loading more...</p>}
+              ).isFetchingNextPage ? (
+                <p className="text-xl text-[#08306b] font-semibold">
+                  Loading More...
+                </p>
+              ) : (
+                  isSearching
+                    ? searchResultsInfiniteQuery.hasNextPage
+                    : allFoodsInfiniteQuery.hasNextPage
+                ) ? (
+                <p className="text-xl text-[#08306b] font-semibold transition ease-in duration-300">
+                  Loading More...
+                </p>
+              ) : (
+                <p className="text-xl text-[#08306b] font-semibold transition ease-in duration-300">
+                  Nothing More to Load...
+                </p>
+              )}
             </div>
           )}
 

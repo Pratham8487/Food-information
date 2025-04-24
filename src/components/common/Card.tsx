@@ -1,9 +1,9 @@
 import { Food } from "../../types/Food";
 import { Clock } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 interface FoodCardProps {
   food: Food;
-  onClick: () => void;
 }
 
 const getNutrient = (foodNutrients: any[] | undefined, name: string) =>
@@ -11,7 +11,7 @@ const getNutrient = (foodNutrients: any[] | undefined, name: string) =>
     n.nutrientName.toLowerCase().includes(name.toLowerCase())
   )?.value || "N/A";
 
-const FoodCard: React.FC<FoodCardProps> = ({ food, onClick }) => {
+const FoodCard: React.FC<FoodCardProps> = ({ food }) => {
   const calories = getNutrient(food.foodNutrients, "Energy");
   const protein = getNutrient(food.foodNutrients, "Protein");
   const fat = getNutrient(food.foodNutrients, "Total Lipid");
@@ -21,10 +21,16 @@ const FoodCard: React.FC<FoodCardProps> = ({ food, onClick }) => {
 
   const hasNutritionData = food.foodNutrients && food.foodNutrients.length > 0;
 
+  const navigate = useNavigate();
+
+  const handleCardClick = () => {
+    navigate(`/food/${food.fdcId}`);
+  };
+
   return (
     <div
       className="bg-white shadow-xs rounded-xl overflow-hidden hover:shadow-lg transition duration-300"
-      onClick={onClick}
+      onClick={handleCardClick}
     >
       <div className="bg-[#DEEBF7] p-4 border-b border-blue-100">
         <h2 className="text-lg font-bold text-[#08519C]">{food.description}</h2>
@@ -73,14 +79,14 @@ const FoodCard: React.FC<FoodCardProps> = ({ food, onClick }) => {
             <div className="grid grid-cols-3 gap-2 mb-2">
               <div className="flex flex-col items-center p-2 bg-white rounded-lg">
                 <span className="text-xs text-gray-500">Protein:</span>
-                <span className="">{protein}</span>
+                <span className="font-bold text-[#2171B5]">{protein}</span>
               </div>
               <div className="flex flex-col items-center p-2 bg-white rounded-lg">
                 <span className="text-xs text-gray-500">Fat</span>
                 <span className="font-bold text-[#2171B5]">{fat}</span>
               </div>
               <div className="flex flex-col items-center p-2 bg-white rounded-lg">
-                <span className="text-xs text-gray-500">crabs</span>
+                <span className="text-xs text-gray-500">Crabs</span>
                 <span className="font-bold text-[#2171B5]">{crabs}</span>
               </div>
             </div>

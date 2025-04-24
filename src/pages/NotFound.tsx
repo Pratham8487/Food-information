@@ -1,6 +1,10 @@
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function NotFoundPage() {
+  const navigate = useNavigate();
+  const handleGoBack = () => {
+    navigate(-1);
+  };
   return (
     <div>
       <h1 className="text-4xl font-bold text-center mt-20 text-red-500">
@@ -10,11 +14,14 @@ function NotFoundPage() {
         Sorry, the page you are looking for does not exist.
       </p>
 
-      <Link to="/" className="text-blue-500 hover:underline">
-        <p className="text-center mt-4 text-blue-500 hover:underline">
-          Go back to Home Page
+      <div className="flex items-center justify-center">
+        <p
+          onClick={handleGoBack}
+          className="text-center my-4 cursor-pointer text-blue-500 hover:underline"
+        >
+          Go back
         </p>
-      </Link>
+      </div>
     </div>
   );
 }

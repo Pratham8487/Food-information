@@ -16,8 +16,20 @@ export interface Food {
     unitName: string;
     value: number;
   }>;
-  finalFoodInputFoods?: any[];
-  foodMeasures?: any[];
+  finalFoodInputFoods?: Array<{
+    gramWeight: number;
+    foodDescription: string;
+    unit: number;
+  }>;
+  foodMeasures?: Array<{
+    disseminationText?: String;
+    measureUnitName?: String;
+    measureUnitId?: number;
+    measureUnitAbbreviation?: String;
+    id?: number;
+    gramWeight?: number;
+    
+  }>;
   foodAttributes?: any[];
   foodAttributeTypes?: any[];
   foodVersionIds?: any[];

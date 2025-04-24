@@ -1,5 +1,5 @@
 import axios from "axios";
-import {  FoodSearchResponse } from "../types/Food";
+import { Food, FoodSearchResponse } from "../types/Food";
 
 const API_KEY = "qcvl1acoah0Lix4Z7HRdVazNrUhfh0bqNP2sPnxS";
 
@@ -58,4 +58,14 @@ export const searchFoods = async (
     totalPages: Math.ceil(res.data.totalHits / pageSize),
     pageSize,
   };
+};
+
+export const getFoodById = async (fdcId: string): Promise<Food> => {
+  const response = await axiosInstance.get(`/food/${fdcId}`,{
+    params:{
+      api_key: API_KEY
+    }
+  });
+  console.log(response.data,"getfoodbyiddata---=-")
+  return response.data;
 };
