@@ -16,8 +16,6 @@ const FoodCard: React.FC<FoodCardProps> = ({ food }) => {
   const protein = getNutrient(food.foodNutrients, "Protein");
   const fat = getNutrient(food.foodNutrients, "Total Lipid");
   const crabs = getNutrient(food.foodNutrients, "Carbohydrate");
-  // const sugar = getNutrient(food.foodNutrients, "Sugars");
-  // const fiber = getNutrient(food.foodNutrients, "Fiber");
 
   const hasNutritionData = food.foodNutrients && food.foodNutrients.length > 0;
 
@@ -33,7 +31,9 @@ const FoodCard: React.FC<FoodCardProps> = ({ food }) => {
       onClick={handleCardClick}
     >
       <div className="bg-[#DEEBF7] p-4 border-b border-blue-100">
-        <h2 className="text-lg font-bold text-[#08519C]">{food.description}</h2>
+        <h2 className="text-lg font-bold text-[#08519C] break-normal">
+          {food.description}
+        </h2>
         <div className="flex items-center mt-1 text-sm text-[#2171B5]">
           <span className="px-2 py-0.5 bg-blue-100 rounded-full">
             {food.foodCategory || "Uncatagorized"}

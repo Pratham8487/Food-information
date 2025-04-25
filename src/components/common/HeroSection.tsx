@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-
 import FoodBG from "../../assets/FoodBG.jpg";
 
 function HeroSection() {
@@ -9,7 +8,7 @@ function HeroSection() {
       className="bg-cover bg-center min-h-screen rounded-xl shadow-md w-full object-cover flex flex-col items-center justify-center"
     >
       <div className="text-center">
-        <h1 className="break-keep text-4xl md:text-5xl font-bold text-primary mb-4">
+        <h1 className="break-keep text-4xl md:text-5xl font-bold text-primary mb-4 animate-pulse">
           <span className="opacity-60">🍏</span> Eat healthy and stay happy.
         </h1>
         <p className="text-lg text-gray-700 mb-6">

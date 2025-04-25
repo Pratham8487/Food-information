@@ -50,20 +50,17 @@ const Navbar = () => {
               Browse
             </span>
           </Link>
-          {/* <Link
-            to="/favorites"
-            className="block lg:inline-block px-4 py-2 lg:p-0"
-          >
+          <Link to="/about-us" className="block lg:inline-block px-4 py-2 lg:p-0">
             <span
               className={`text-gray-600 text-lg transition-all duration-300 ${
-                path === "/favorites"
+                path === "/about-us"
                   ? "text-[#4292C6] font-bold underline underline-offset-4"
                   : "text-gray-600 hover:text-[#4292C6] hover:underline underline-offset-4 decoration-2"
               }`}
             >
-              Favorites
+              About
             </span>
-          </Link> */}
+          </Link>
         </div>
       </div>
 
@@ -72,25 +69,25 @@ const Navbar = () => {
           <div className="flex flex-col space-y-2 ">
             <Link
               to="/"
-              className="px-8 py-2 text-gray-600 text-lg font-semibold hover:bg-green-50 hover:text-green-500"
+              className="px-8 py-2 text-gray-600 text-lg font-semibold hover:bg-green-50 "
               onClick={() => setIsMenuOpen(false)}
             >
               Home
             </Link>
             <Link
               to="/browse"
-              className="px-8 py-2 text-gray-600 text-lg font-semibold hover:bg-green-50 hover:text-green-500"
+              className="px-8 py-2 text-gray-600 text-lg font-semibold hover:bg-green-50 "
               onClick={() => setIsMenuOpen(false)}
             >
               Browse
             </Link>
-            {/* <Link
-              to="/favorites"
-              className="px-8 py-2 text-gray-600 text-lg font-semibold hover:bg-green-50 hover:text-green-500"
+            <Link
+              to="/about-us"
+              className="px-8 py-2 text-gray-600 text-lg font-semibold hover:bg-green-50 "
               onClick={() => setIsMenuOpen(false)}
             >
-              Favorites
-            </Link> */}
+              About
+            </Link>
           </div>
         </div>
       )}

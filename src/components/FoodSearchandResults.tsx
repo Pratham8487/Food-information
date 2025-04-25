@@ -8,6 +8,7 @@ import { FoodSearchResponse } from "../types/Food";
 import { useInView } from "react-intersection-observer";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
+import { TextField } from "@mui/material";
 
 interface FoodSearchAndResultsProps {
   pageSize: number;
@@ -90,13 +91,23 @@ const FoodSearchAndResults = ({
     handleLoadMore();
   }
 
-  function handleSearchSubmit(e: React.FormEvent) {
-    e.preventDefault();
+  function handleSearchSubmit(
+    e: React.FormEvent | React.MouseEvent,
+    category?: string
+  ) {
+    if (e) e.preventDefault();
+
+    if (category) {
+      setSearchTerm(category);
+    }
+
     if (!useInfiniteScroll) {
       setCurrentPage(1);
     }
-    setIsSearching(!!searchTerm);
+
+    setIsSearching(!!(category || searchTerm));
   }
+  console.log(searchTerm);
 
   let isPending, error, currentData, totalPages;
 
@@ -137,7 +148,7 @@ const FoodSearchAndResults = ({
       </div>
     );
   }
-  // console.log(currentData, "data----------");
+  console.log(currentData, "data------- in food search component---");
   if (error)
     return (
       <div className="flex justify-center p-8 text-red-500">
@@ -164,14 +175,51 @@ const FoodSearchAndResults = ({
             >
               <Search size={20} />
             </button>
-            <input
+
+            <TextField
               type="text"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               placeholder="Search food like 'Apple','Milk'..."
-              className="w-full h-14 pl-12 pr-4 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#4292C6]"
+              variant="outlined"
+              fullWidth
+              InputProps={{
+                style: {
+                  height: "56px",
+                  paddingLeft: "48px",
+                  borderRadius: "0.75rem",
+                },
+              }}
             />
           </form>
+        </div>
+        <div className="items-center flex flex-col justify-center p-3">
+          <div className="flex flex-wrap justify-center md:justify-between gap-4 md:gap-8 lg:space-x-20">
+            <div
+              className="rounded-full bg-[#DEEBF7] px-4 py-2 text-[#08519C] border border-[#6BAED6] cursor-pointer text-sm md:text-base hover:bg-[#C6DBEF]"
+              onClick={(e) => handleSearchSubmit(e, "Fruits")}
+            >
+              Fruits
+            </div>
+            <div
+              className="rounded-full bg-[#DEEBF7] px-4 py-2 text-[#08519C] border border-[#6BAED6] cursor-pointer text-sm md:text-base hover:bg-[#C6DBEF]"
+              onClick={(e) => handleSearchSubmit(e, "Vegetables")}
+            >
+              Vegetables
+            </div>
+            <div
+              className="rounded-full bg-[#DEEBF7] px-4 py-2 text-[#08519C] border border-[#6BAED6] cursor-pointer text-sm md:text-base hover:bg-[#C6DBEF]"
+              onClick={(e) => handleSearchSubmit(e, "Beverages")}
+            >
+              Beverages
+            </div>
+            <div
+              className="rounded-full bg-[#DEEBF7] px-4 py-2 text-[#08519C] border border-[#6BAED6] cursor-pointer text-sm md:text-base hover:bg-[#C6DBEF] "
+              onClick={(e) => handleSearchSubmit(e, "Cold Drinks")}
+            >
+              Cold Drinks
+            </div>
+          </div>
         </div>
       </div>
 

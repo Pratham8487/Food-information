@@ -4,7 +4,11 @@ export interface Food {
   dataType?: string;
   publishedDate?: string;
   brandOwner?: string;
-  foodCategory?: string;
+  foodCategory?: Array<{
+    code?: number;
+    description?: string;
+    id?: number;
+  }>;
   tags?: string[];
   allHighlightFields?: string;
   score?: number;
@@ -16,6 +20,8 @@ export interface Food {
     unitName: string;
     value: number;
   }>;
+  ndbNumber?:number;
+  isHistoricalReference?: boolean;
   finalFoodInputFoods?: Array<{
     gramWeight: number;
     foodDescription: string;
@@ -28,7 +34,6 @@ export interface Food {
     measureUnitAbbreviation?: String;
     id?: number;
     gramWeight?: number;
-    
   }>;
   foodAttributes?: any[];
   foodClass?: string;

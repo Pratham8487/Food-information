@@ -43,7 +43,7 @@ const FoodDetailPage: React.FC = () => {
     staleTime: 5000,
     retry: 1,
   });
-  // console.log(food, "food data-----");
+  console.log(food, "food dat a in detail page-----");
 
   const handleGoBack = () => {
     navigate(-1);
@@ -112,11 +112,16 @@ const FoodDetailPage: React.FC = () => {
       attributeGroups[typeName] = [];
     }
 
-    attributeGroups[typeName].push({ 
-      name: attr.name, 
-      value: typeof attr.value === 'string' ? attr.value : JSON.stringify(attr.value)
+    attributeGroups[typeName].push({
+      name: attr.name,
+      value:
+        typeof attr.value === "string"
+          ? attr.value
+          : JSON.stringify(attr.value),
     });
   });
+
+  // console.log(food.foodCategory[0],"foodcategory--------")
 
   const hasNutritionData = food.foodNutrients && food.foodNutrients.length > 0;
 
@@ -127,11 +132,21 @@ const FoodDetailPage: React.FC = () => {
           {food.description}
         </h1>
         <div className="flex flex-wrap gap-2 mt-4">
-          {food.foodCategory && (
+          {/* {food.foodCategory && (
             <span className="inline-flex items-center px-3 py-1 bg-[#C6DBEF] text-[#08519C] rounded-full text-sm font-medium">
-              {typeof food.foodCategory === 'string' ? food.foodCategory : food.description}
+              {typeof food.foodCategory === "string"
+                ? food.foodCategory
+                : food.description}
+            </span>
+          )} */}
+          {Array.isArray(food.foodCategory) && food.foodCategory.length > 0 && (
+            <span className="inline-flex items-center px-3 py-1 bg-[#C6DBEF] text-[#08519C] rounded-full text-sm font-medium">
+              {food.foodCategory[0].description} (Code:{" "}
+              {food.foodCategory[0].code}, ID: {food.foodCategory[0].id})
+              <p>foodcategory section</p>
             </span>
           )}
+
           {food.dataType && (
             <span className="inline-flex items-center px-3 py-1 bg-[#C6DBEF] text-[#08519C] rounded-full text-sm font-medium">
               {food.dataType}
@@ -140,6 +155,11 @@ const FoodDetailPage: React.FC = () => {
           {food.fdcId && (
             <span className="inline-flex items-center px-3 py-1 bg-[#C6DBEF] text-[#08519C] rounded-full text-sm font-medium">
               ID: {food.fdcId}
+            </span>
+          )}
+          {food.ndbNumber && (
+            <span className="inline-flex items-center px-3 py-1 bg-[#C6DBEF] text-[#08519C] rounded-full text-sm font-medium">
+              ndbNumber: {food.ndbNumber}
             </span>
           )}
         </div>
@@ -190,6 +210,16 @@ const FoodDetailPage: React.FC = () => {
                     <p className="font-medium text-[#2171B5]">
                       {food.dataType}
                     </p>
+                    {food.foodClass && (
+                      <div>
+                        <p className="text-sm text-gray-500">
+                          {" "}
+                          <span className="font-medium text-sm ">
+                            {food.foodClass}
+                          </span>
+                        </p>
+                      </div>
+                    )}
                   </div>
                 </div>
               )}
@@ -241,7 +271,7 @@ const FoodDetailPage: React.FC = () => {
                           key={index}
                           className="px-2 py-1 bg-blue-100 text-blue-800 rounded text-xs"
                         >
-                          {typeof tag === 'string' ? tag : JSON.stringify(tag)}
+                          {typeof tag === "string" ? tag : JSON.stringify(tag)}
                         </span>
                       ))}
                     </div>
@@ -256,17 +286,42 @@ const FoodDetailPage: React.FC = () => {
               )}
               {food.description && (
                 <div className="gap-4">
-                  <p className="font-medium text-md mt-1">{food.description} <span className="text-sm">({food.dataType})</span></p>
+                  <p className="font-medium text-md mt-1">
+                    {food.description}{" "}
+                    <span className="text-sm">({food.dataType})</span>
+                  </p>
                 </div>
               )}
               {food.startDate && food.endDate && food.publicationDate && (
                 <div>
                   <p className="font-normal text-gray-600 font-mono text-sm mt-1">
-                    Start Date: <span>{typeof food.startDate === 'string' ? food.startDate : formatDate(food.startDate.toString())}</span>
+                    Start Date:{" "}
+                    <span>
+                      {typeof food.startDate === "string"
+                        ? food.startDate
+                        : formatDate(food.startDate.toString())}
+                    </span>
                     <br />
-                    End Date: <span>{typeof food.endDate === 'string' ? food.endDate : formatDate(food.endDate.toString())}</span>
+                    End Date:{" "}
+                    <span>
+                      {typeof food.endDate === "string"
+                        ? food.endDate
+                        : formatDate(food.endDate.toString())}
+                    </span>
                     <br />
-                    Publication Date: <span>{typeof food.publicationDate === 'string' ? food.publicationDate : formatDate(food.publicationDate.toString())}</span>
+                    Publication Date:{" "}
+                    <span>
+                      {typeof food.publicationDate === "string"
+                        ? food.publicationDate
+                        : formatDate(food.publicationDate.toString())}
+                    </span>
+                  </p>
+                </div>
+              )}
+              {food.isHistoricalReference && (
+                <div>
+                  <p className="text-sm text-gray-500">
+                    It is Historical Referenced Food.
                   </p>
                 </div>
               )}
@@ -282,9 +337,7 @@ const FoodDetailPage: React.FC = () => {
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
               <div className="bg-white p-3 rounded-lg shadow-sm">
                 <p className="text-sm text-gray-600 mb-1 font-mono">Energy</p>
-                <p className="text-xl font-medium text-[#08519C]">
-                  {calories}
-                </p>
+                <p className="text-xl font-medium text-[#08519C]">{calories}</p>
               </div>
               <div className="bg-white p-3 rounded-lg shadow-sm">
                 <p className="text-sm text-gray-600 mb-1 font-mono">Protein</p>

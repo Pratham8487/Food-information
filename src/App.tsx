@@ -6,6 +6,7 @@ import FileNotFound from "./pages/NotFound";
 import Browse from "./pages/BrowsePage";
 import FoodDetailPage from "./pages/FoodDetails";
 // import Favorites from "./pages/Favorites";
+import AboutUs from "./pages/AboutUsPage";
 
 const queryClient = new QueryClient();
 
@@ -18,6 +19,7 @@ function App() {
             <Route index element={<Home />} />
             <Route path="browse" element={<Browse />} />
             <Route path="/food/:fdcId" element={<FoodDetailPage />} />
+            <Route path="about-us" element={<AboutUs />} />
             {/* <Route path="favorites" element={<Favorites />} /> */}
             <Route path="*" element={<FileNotFound />} />
           </Route>
