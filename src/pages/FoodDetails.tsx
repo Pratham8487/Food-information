@@ -43,7 +43,7 @@ const FoodDetailPage: React.FC = () => {
     staleTime: 5000,
     retry: 1,
   });
-  console.log(food, "food data-----");
+  // console.log(food, "food data-----");
 
   const handleGoBack = () => {
     navigate(-1);
@@ -112,7 +112,10 @@ const FoodDetailPage: React.FC = () => {
       attributeGroups[typeName] = [];
     }
 
-    attributeGroups[typeName].push({ name: attr.name, value: attr.value });
+    attributeGroups[typeName].push({ 
+      name: attr.name, 
+      value: typeof attr.value === 'string' ? attr.value : JSON.stringify(attr.value)
+    });
   });
 
   const hasNutritionData = food.foodNutrients && food.foodNutrients.length > 0;
@@ -120,20 +123,22 @@ const FoodDetailPage: React.FC = () => {
   return (
     <div className="max-w-4xl mx-auto py-12 border border-gray-200">
       <div className="bg-[#DEEBF7] p-6 rounded-b-xl shadow-sm">
-        <h1 className="text-2xl font-semibold text-[#08306B]">{food.description}</h1>
+        <h1 className="text-2xl font-semibold text-[#08306B]">
+          {food.description}
+        </h1>
         <div className="flex flex-wrap gap-2 mt-4">
           {food.foodCategory && (
-            <span className="inline-flex items-center px-3 py-1 bg-[#C6DBEF] text-[#08519C]  rounded-full text-sm font-medium">
-              {food.foodCategory}
+            <span className="inline-flex items-center px-3 py-1 bg-[#C6DBEF] text-[#08519C] rounded-full text-sm font-medium">
+              {typeof food.foodCategory === 'string' ? food.foodCategory : food.description}
             </span>
           )}
           {food.dataType && (
-            <span className="inline-flex items-center px-3 py-1 bg-[#C6DBEF] text-[#08519C]  rounded-full text-sm font-medium">
+            <span className="inline-flex items-center px-3 py-1 bg-[#C6DBEF] text-[#08519C] rounded-full text-sm font-medium">
               {food.dataType}
             </span>
           )}
           {food.fdcId && (
-            <span className="inline-flex items-center px-3 py-1 bg-[#C6DBEF] text-[#08519C]  rounded-full text-sm font-medium">
+            <span className="inline-flex items-center px-3 py-1 bg-[#C6DBEF] text-[#08519C] rounded-full text-sm font-medium">
               ID: {food.fdcId}
             </span>
           )}
@@ -182,8 +187,20 @@ const FoodDetailPage: React.FC = () => {
                   <AlertCircle size={18} className="mt-1 mr-2 text-gray-600" />
                   <div>
                     <p className="text-sm text-gray-600 font-mono">Data Type</p>
-                    <p className="font-medium text-[#2171B5]">{food.dataType}</p>
+                    <p className="font-medium text-[#2171B5]">
+                      {food.dataType}
+                    </p>
                   </div>
+                </div>
+              )}
+              {food.foodClass && food.foodCode && (
+                <div>
+                  <p className="text-sm text-gray-500 font-mono">Food Class</p>
+                  <p className="font-medium text-sm mt-1">{food.foodClass}</p>
+                  <br />
+                  <p className="text-sm text-gray-500 font-mono">Food Code</p>
+                  <p className="font-medium text-sm mt-1 ">{food.foodCode}</p>
+                  <br />
                 </div>
               )}
             </div>
@@ -224,7 +241,7 @@ const FoodDetailPage: React.FC = () => {
                           key={index}
                           className="px-2 py-1 bg-blue-100 text-blue-800 rounded text-xs"
                         >
-                          {tag}
+                          {typeof tag === 'string' ? tag : JSON.stringify(tag)}
                         </span>
                       ))}
                     </div>
@@ -235,6 +252,22 @@ const FoodDetailPage: React.FC = () => {
                 <div>
                   <p className="text-sm text-gray-500">Ingredients</p>
                   <p className="font-medium text-sm mt-1">{food.ingredients}</p>
+                </div>
+              )}
+              {food.description && (
+                <div className="gap-4">
+                  <p className="font-medium text-md mt-1">{food.description} <span className="text-sm">({food.dataType})</span></p>
+                </div>
+              )}
+              {food.startDate && food.endDate && food.publicationDate && (
+                <div>
+                  <p className="font-normal text-gray-600 font-mono text-sm mt-1">
+                    Start Date: <span>{typeof food.startDate === 'string' ? food.startDate : formatDate(food.startDate.toString())}</span>
+                    <br />
+                    End Date: <span>{typeof food.endDate === 'string' ? food.endDate : formatDate(food.endDate.toString())}</span>
+                    <br />
+                    Publication Date: <span>{typeof food.publicationDate === 'string' ? food.publicationDate : formatDate(food.publicationDate.toString())}</span>
+                  </p>
                 </div>
               )}
             </div>
@@ -249,39 +282,49 @@ const FoodDetailPage: React.FC = () => {
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
               <div className="bg-white p-3 rounded-lg shadow-sm">
                 <p className="text-sm text-gray-600 mb-1 font-mono">Energy</p>
-                <p className="text-xl font-bold text-[#08519C]">{calories}</p>
+                <p className="text-xl font-medium text-[#08519C]">
+                  {calories}
+                </p>
               </div>
               <div className="bg-white p-3 rounded-lg shadow-sm">
                 <p className="text-sm text-gray-600 mb-1 font-mono">Protein</p>
-                <p className="text-xl font-bold text-[#08519C]">{protein}</p>
+                <p className="text-xl font-semibold text-[#08519C]">
+                  {protein}
+                </p>
               </div>
               <div className="bg-white p-3 rounded-lg shadow-sm">
-                <p className="text-sm text-gray-600 mb-1 font-mono">Total Fat</p>
-                <p className="text-xl font-bold text-[#08519C]">{fat}</p>
+                <p className="text-sm text-gray-600 mb-1 font-mono">
+                  Total Fat
+                </p>
+                <p className="text-xl font-semibold text-[#08519C]">{fat}</p>
               </div>
               <div className="bg-white p-3 rounded-lg shadow-sm">
-                <p className="text-sm text-gray-600 mb-1 font-mono">Carbohydrates</p>
-                <p className="text-xl font-bold text-[#08519C]">{carbs}</p>
+                <p className="text-sm text-gray-600 mb-1 font-mono">
+                  Carbohydrates
+                </p>
+                <p className="text-xl font-semibold text-[#08519C]">{carbs}</p>
               </div>
               <div className="bg-white p-3 rounded-lg shadow-sm">
                 <p className="text-sm text-gray-600 mb-1 font-mono">Fiber</p>
-                <p className="text-xl font-bold text-[#08519C]">{fiber}</p>
+                <p className="text-xl font-semibold text-[#08519C]">{fiber}</p>
               </div>
               <div className="bg-white p-3 rounded-lg shadow-sm">
                 <p className="text-sm text-gray-600 mb-1 font-mono">Sugars</p>
-                <p className="text-xl font-bold text-[#08519C]">{sugar}</p>
+                <p className="text-xl font-semibold text-[#08519C]">{sugar}</p>
               </div>
               <div className="bg-white p-3 rounded-lg shadow-sm">
                 <p className="text-sm text-gray-600 mb-1 font-mono">Alcohol</p>
-                <p className="text-xl font-bold text-[#08519C]">{alcohol}</p>
+                <p className="text-xl font-semibold text-[#08519C]">
+                  {alcohol}
+                </p>
               </div>
               <div className="bg-white p-3 rounded-lg shadow-sm">
                 <p className="text-sm text-gray-600 mb-1 font-mono">Water</p>
-                <p className="text-xl font-bold text-[#08519C]">{water}</p>
+                <p className="text-xl font-semibold text-[#08519C]">{water}</p>
               </div>
             </div>
 
-            {attributeGroups && (
+            {Object.keys(attributeGroups).length > 0 && (
               <div className="bg-white rounded-lg p-4 shadow-sm mt-6">
                 <h2 className="text-lg font-semibold text-[#08519C] mb-4">
                   Food Attributes
@@ -294,7 +337,10 @@ const FoodDetailPage: React.FC = () => {
                       </h3>
                       <ul className="list-disc list-inside space-y-1">
                         {attributes.map((attr, idx) => (
-                          <li key={idx} className="text-sm text-gray-600 font-mono uppercase">
+                          <li
+                            key={idx}
+                            className="text-sm text-gray-600 font-mono uppercase"
+                          >
                             {attr.name
                               ? `${attr.name}: ${attr.value}`
                               : attr.value}
@@ -322,9 +368,9 @@ const FoodDetailPage: React.FC = () => {
           >
             Go Back
           </button>
-          <button className="px-4 py-2 bg-[#2171B5] hover:bg-[#08519C] cursor-pointer rounded-lg text-white font-medium transition">
+          {/* <button className="px-4 py-2 bg-[#2171B5] hover:bg-[#08519C] cursor-pointer rounded-lg text-white font-medium transition">
             Save to Favorites
-          </button>
+          </button> */}
         </div>
       </div>
     </div>

@@ -31,6 +31,11 @@ export interface Food {
     
   }>;
   foodAttributes?: any[];
+  foodClass?: string;
+  startDate?: any;
+  endDate?: any;
+  publicationDate?: any;
+  foodCode?: string;
   foodAttributeTypes?: any[];
   foodVersionIds?: any[];
   brandName?: string;

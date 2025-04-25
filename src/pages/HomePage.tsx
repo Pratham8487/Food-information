@@ -17,7 +17,6 @@ const HomePage = () => {
       <HeroSection />
       <ErrorBoundary FallbackComponent={ErrorFallback}>
         <FoodSearchAndResults pageSize={12} useInfiniteScroll={false} />
-        {/* <FoodSearchAndResults Page_size={10} /> */}
       </ErrorBoundary>
     </div>
   );

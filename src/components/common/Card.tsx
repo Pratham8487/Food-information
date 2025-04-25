@@ -29,7 +29,7 @@ const FoodCard: React.FC<FoodCardProps> = ({ food }) => {
 
   return (
     <div
-      className="bg-white shadow-xs rounded-xl overflow-hidden hover:shadow-lg transition duration-300"
+      className="bg-white shadow-xs rounded-xl overflow-hidden hover:shadow-lg transition duration-300 cursor-pointer"
       onClick={handleCardClick}
     >
       <div className="bg-[#DEEBF7] p-4 border-b border-blue-100">
@@ -58,7 +58,7 @@ const FoodCard: React.FC<FoodCardProps> = ({ food }) => {
           {food.publishedDate && (
             <div className="flex items-center text-sm">
               <Clock size={16} className="mr-1 text-gray-500" />
-              <span className="text-gray-600">
+              <span className="text-gray-600 font-mono">
                 Published: {new Date(food.publishedDate).toLocaleDateString()}
               </span>
             </div>
@@ -78,15 +78,17 @@ const FoodCard: React.FC<FoodCardProps> = ({ food }) => {
 
             <div className="grid grid-cols-3 gap-2 mb-2">
               <div className="flex flex-col items-center p-2 bg-white rounded-lg">
-                <span className="text-xs text-gray-500">Protein:</span>
+                <span className="text-xs text-gray-500 font-mono">
+                  Protein:
+                </span>
                 <span className="font-bold text-[#2171B5]">{protein}</span>
               </div>
               <div className="flex flex-col items-center p-2 bg-white rounded-lg">
-                <span className="text-xs text-gray-500">Fat</span>
+                <span className="text-xs text-gray-500 font-mono">Fat</span>
                 <span className="font-bold text-[#2171B5]">{fat}</span>
               </div>
               <div className="flex flex-col items-center p-2 bg-white rounded-lg">
-                <span className="text-xs text-gray-500">Crabs</span>
+                <span className="text-xs text-gray-500 font-mono">Crabs</span>
                 <span className="font-bold text-[#2171B5]">{crabs}</span>
               </div>
             </div>

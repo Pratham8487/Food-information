@@ -137,7 +137,7 @@ const FoodSearchAndResults = ({
       </div>
     );
   }
-  console.log(currentData, "data----------");
+  // console.log(currentData, "data----------");
   if (error)
     return (
       <div className="flex justify-center p-8 text-red-500">
@@ -150,7 +150,7 @@ const FoodSearchAndResults = ({
   return (
     <div className="sm:p-3 md:p-3">
       <div>
-        <h1 className="text-4xl md:text-5xl sm:text-xl font-bold text-primary mb-4 flex items-center justify-center">
+        <h1 className=" md:text-5xl py-3 sm:text-xl font-bold text-primary mb-4 flex items-center justify-center text-4xl">
           Search Food and Browse
         </h1>
         <div className="px-10 py-2 flex items-center justify-center">
@@ -169,7 +169,6 @@ const FoodSearchAndResults = ({
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               placeholder="Search food like 'Apple','Milk'..."
-              autoFocus
               className="w-full h-14 pl-12 pr-4 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#4292C6]"
             />
           </form>

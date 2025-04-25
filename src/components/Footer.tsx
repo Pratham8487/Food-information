@@ -36,7 +36,7 @@ function Footer() {
               onClick={() =>
                 setFollow(follow === "+Follow" ? "Followed..." : "+Follow")
               }
-              className="inline-block cursor-pointer p-2 text-blue-500 hover:underline"
+              className="inline-block cursor-pointer p-2 text-[#2171B5] hover:underline"
             >
               <span
                 key={follow}
@@ -54,7 +54,7 @@ function Footer() {
           </h1>
           <p className="mt-4 text-sm">
             For inquiries, please reach out to us at{" "}
-            <span className="text-blue-500 hover:underline hover:cursor-pointer">
+            <span className="text-[#2171B5] hover:underline hover:cursor-pointer">
               support@care.com
             </span>
           </p>
@@ -67,36 +67,23 @@ function Footer() {
 
           <ul className="gap-2">
             {["About us", "Testimonials", "Blog"].map((items) => (
-              <li key={items} className="text-sm">
-                <span>{items}</span>
+              <li key={items} className="text-sm  ">
+                <span className="hover:text-[#4292C6] cursor-pointer">{items}</span>
               </li>
             ))}
           </ul>
         </div>
-
-        {/* <div className="pb-4 w-full sm:w-1/2 lg:w-1/4 px-2 break-normal">
-          <h1 className="flex items-center text-lg font-bold mt-4">
-            <span className="uppercase text-black">Our Menu</span>
-          </h1>
-          <ul className="">
-            {["Breakfast", "Lunch", "Dinner"].map((items) => (
-              <li key={items} className="text-sm">
-                <span>{items}</span>
-              </li>
-            ))}
-          </ul>
-        </div> */}
       </div>
       <div className="text-center flex flex-col sm:flex-row gap-2 justify-between items-center p-4 container mx-auto px-4">
         <p className="">&copy; 2025 All rights reserved.</p>
         <div className="flex flex-wrap justify-center sm:justify-end gap-2">
-          <p className=" hover:text-blue-400 hover:underline hover:cursor-pointer">
+          <p className=" hover:text-[#4292C6] hover:underline hover:cursor-pointer">
             Terms of Service
           </p>
-          <p className=" hover:text-blue-400 hover:underline hover:cursor-pointer">
+          <p className=" hover:text-[#4292C6] hover:underline hover:cursor-pointer">
             | Privacy Policy
           </p>
-          <p className=" hover:text-blue-400 hover:underline hover:cursor-pointer">
+          <p className=" hover:text-[#4292C6] hover:underline hover:cursor-pointer">
             | Cookie Policy
           </p>
         </div>

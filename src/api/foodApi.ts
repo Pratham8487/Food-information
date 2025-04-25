@@ -61,11 +61,11 @@ export const searchFoods = async (
 };
 
 export const getFoodById = async (fdcId: string): Promise<Food> => {
-  const response = await axiosInstance.get(`/food/${fdcId}`,{
-    params:{
-      api_key: API_KEY
-    }
+  const response = await axiosInstance.get(`/food/${fdcId}`, {
+    params: {
+      api_key: API_KEY,
+    },
   });
-  console.log(response.data,"getfoodbyiddata---=-")
+  // console.log(response.data, "getfoodbyiddata---=-");
   return response.data;
 };
