@@ -1,4 +1,10 @@
-import { useState, useCallback } from "react";
+import {
+  useState,
+  useCallback,
+  useEffect,
+  useRef,
+  SetStateAction,
+} from "react";
 import { useQuery, useInfiniteQuery } from "@tanstack/react-query";
 import { getFoods, searchFoods } from "../api/foodApi";
 import FoodCard from "./common/Card";
@@ -20,8 +26,12 @@ const FoodSearchAndResults = ({
   useInfiniteScroll = false,
 }: FoodSearchAndResultsProps) => {
   const [currentPage, setCurrentPage] = useState(1);
+  const [inputValue, setInputValue] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
   const [isSearching, setIsSearching] = useState(false);
+  const [isTyping, setIsTyping] = useState(false);
+
+  const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const { ref, inView } = useInView({
     threshold: 0.1,
@@ -91,23 +101,51 @@ const FoodSearchAndResults = ({
     handleLoadMore();
   }
 
-  function handleSearchSubmit(
-    e: React.FormEvent | React.MouseEvent,
-    category?: string
-  ) {
-    if (e) e.preventDefault();
+  const handleInputChange = (e: { target: { value: any } }) => {
+    const value = e.target.value;
+    setInputValue(value);
+    setIsTyping(true);
 
-    if (category) {
-      setSearchTerm(category);
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
     }
+
+    timeoutRef.current = setTimeout(() => {
+      setSearchTerm(value);
+      setIsTyping(false);
+      if (value) {
+        setIsSearching(true);
+        if (!useInfiniteScroll) {
+          setCurrentPage(1);
+        }
+      } else {
+        setIsSearching(false);
+      }
+    }, 1000);
+  };
+
+  useEffect(() => {
+    return () => {
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+      }
+    };
+  }, []);
+
+  function handleCategorySelect(category: SetStateAction<string>) {
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+    }
+
+    setInputValue(category);
+    setSearchTerm(category);
+    setIsTyping(false);
+    setIsSearching(true);
 
     if (!useInfiniteScroll) {
       setCurrentPage(1);
     }
-
-    setIsSearching(!!(category || searchTerm));
   }
-  console.log(searchTerm);
 
   let isPending, error, currentData, totalPages;
 
@@ -148,7 +186,7 @@ const FoodSearchAndResults = ({
       </div>
     );
   }
-  console.log(currentData, "data------- in food search component---");
+
   if (error)
     return (
       <div className="flex justify-center p-8 text-red-500">
@@ -161,25 +199,19 @@ const FoodSearchAndResults = ({
   return (
     <div className="sm:p-3 md:p-3">
       <div>
-        <h1 className=" md:text-5xl py-3 sm:text-xl font-bold text-primary mb-4 flex items-center justify-center text-4xl">
+        <h1 className="md:text-5xl py-3 sm:text-xl font-bold text-primary mb-4 flex items-center justify-center text-4xl">
           Search Food and Browse
         </h1>
         <div className="px-10 py-2 flex items-center justify-center">
-          <form
-            onSubmit={handleSearchSubmit}
-            className="relative w-full max-w-xl"
-          >
-            <button
-              type="submit"
-              className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-700"
-            >
+          <div className="relative w-full max-w-xl">
+            <div className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-500">
               <Search size={20} />
-            </button>
+            </div>
 
             <TextField
               type="text"
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
+              value={inputValue}
+              onChange={handleInputChange}
               placeholder="Search food like 'Apple','Milk'..."
               variant="outlined"
               fullWidth
@@ -189,33 +221,36 @@ const FoodSearchAndResults = ({
                   paddingLeft: "48px",
                   borderRadius: "0.75rem",
                 },
+                endAdornment: isTyping && (
+                  <div className="text-sm text-gray-500 mr-2">Typing...</div>
+                ),
               }}
             />
-          </form>
+          </div>
         </div>
         <div className="items-center flex flex-col justify-center p-3">
           <div className="flex flex-wrap justify-center md:justify-between gap-4 md:gap-8 lg:space-x-20">
             <div
               className="rounded-full bg-[#DEEBF7] px-4 py-2 text-[#08519C] border border-[#6BAED6] cursor-pointer text-sm md:text-base hover:bg-[#C6DBEF]"
-              onClick={(e) => handleSearchSubmit(e, "Fruits")}
+              onClick={() => handleCategorySelect("Fruits")}
             >
               Fruits
             </div>
             <div
               className="rounded-full bg-[#DEEBF7] px-4 py-2 text-[#08519C] border border-[#6BAED6] cursor-pointer text-sm md:text-base hover:bg-[#C6DBEF]"
-              onClick={(e) => handleSearchSubmit(e, "Vegetables")}
+              onClick={() => handleCategorySelect("Vegetables")}
             >
               Vegetables
             </div>
             <div
               className="rounded-full bg-[#DEEBF7] px-4 py-2 text-[#08519C] border border-[#6BAED6] cursor-pointer text-sm md:text-base hover:bg-[#C6DBEF]"
-              onClick={(e) => handleSearchSubmit(e, "Beverages")}
+              onClick={() => handleCategorySelect("Beverages")}
             >
               Beverages
             </div>
             <div
-              className="rounded-full bg-[#DEEBF7] px-4 py-2 text-[#08519C] border border-[#6BAED6] cursor-pointer text-sm md:text-base hover:bg-[#C6DBEF] "
-              onClick={(e) => handleSearchSubmit(e, "Cold Drinks")}
+              className="rounded-full bg-[#DEEBF7] px-4 py-2 text-[#08519C] border border-[#6BAED6] cursor-pointer text-sm md:text-base hover:bg-[#C6DBEF]"
+              onClick={() => handleCategorySelect("Cold Drinks")}
             >
               Cold Drinks
             </div>

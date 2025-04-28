@@ -1,32 +1,84 @@
-import FoodBG from "../assets/BalancedFood_Img.jpg";
 import { Link } from "react-router-dom";
 
-function AboutUsPage() {
+const AboutPage = () => {
+  const usdawebsite = "https://fdc.nal.usda.gov/";
+  const GithuBLink = "https://github.com/Pratham8487/Food-information";
   return (
-    <div className="p-3">
-      <div
-        style={{ backgroundImage: `url(${FoodBG})` }}
-        className="bg-cover bg-center min-h-screen rounded-xl shadow-md w-full object-cover flex flex-col items-center justify-center "
-      >
-        <div className="text-center">
-          <h1 className="break-keep text-4xl md:text-5xl font-bold text-primary mb-4 animate-pulse">
-            <span className="opacity-60">🍏</span> Eat healthy and stay happy.
-          </h1>
-          <p className="text-lg text-gray-700 mb-6">
-            Discover nutritional facts for your favorite fruits, veggies &
-            more...
-          </p>
-        </div>
-        <div className="flex items-center justify-center shadow-sm">
+    <div className="max-w-4xl mx-auto p-6 min-h-screen">
+      <h1 className="text-4xl font-bold mb-4 text-center text-[#08519C]">
+        About NutriFind Journey
+      </h1>
+      <p className="text-lg text-black mb-6 text-center max-w-2xl mx-auto">
+        NutriFind is your easy-to-use guide to explore detailed nutritional
+        information about a wide variety of foods.
+      </p>
+
+      <h2 className="text-2xl font-semibold mt-8 mb-2 text-[#2171B5] ">
+        Our Purpose
+      </h2>
+      <p className="text-gray-900 mb-6">
+        NutriFind was created to make nutrition data simple, clear, and
+        accessible for everyone.
+      </p>
+
+      <h2 className="text-2xl font-semibold mt-8 mb-2 text-[#2171B5]">
+        How to Use NutriFind
+      </h2>
+      <ul className="list-disc list-inside text-gray-900 mb-6">
+        <li>
+          Browse our{" "}
           <Link to="/">
-            <button className="bg-[#08519C] cursor-pointer text-white px-6 py-2 rounded-xl shadow hover:bg-[#9306B] transition">
-              Home 
-            </button>
-          </Link>
-        </div>
-      </div>
+            <span className="underline decoration-1 text-[#2171B5] hover:text-[#08519C] ">
+              Home page
+            </span>
+          </Link>{" "}
+          to discover popular foods and their nutrition facts.
+        </li>
+        <li>
+          Use the{" "}
+          <Link to="/browse">
+            <span className="underline decoration-1 text-[#2171B5] hover:text-[#08519C] ">
+              Browse page
+            </span>
+          </Link>{" "}
+          to search for any food item you're curious about.
+        </li>
+        <li>
+          View detailed calories, proteins, fats, carbohydrates, and more for
+          each item.
+        </li>
+      </ul>
+
+      <h2 className="text-2xl font-semibold mt-8 mb-2 text-[#2171B5]">
+        Where Our Data Comes From
+      </h2>
+      <p className="text-gray-900 mb-6">
+        All nutrition information is sourced from the official{" "}
+        <Link to={usdawebsite} target="_blank" rel="noopener noreferrer">
+          <span className="underline decoration-1 text-[#2171B5] hover:text-[#08519C] ">
+            USDA FoodData Central database.
+          </span>
+        </Link>
+      </p>
+
+      <h2 className="text-2xl font-semibold mt-8 mb-2 text-[#2171B5] hover:text-[#08519C]">
+        About the Developer
+      </h2>
+      <p className="text-gray-900 mb-6">
+        This project was built using React, Vite, and Tailwind CSS as a personal
+        project to help others stay informed and healthy.
+      </p>
+      <p>
+        <Link to={GithuBLink} target="_blank" rel="noopener noreferrer">
+          <span className="underline decoration-1 text-[#2171B5] ">
+            Pratham Shah
+          </span>
+        </Link>
+      </p>
     </div>
+    // </div>
   );
 }
 
-export default AboutUsPage;
+
+export default AboutPage;

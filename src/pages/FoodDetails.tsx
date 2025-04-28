@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { Food } from "../types/Food";
@@ -31,6 +31,50 @@ const getNutrient = (
 const FoodDetailPage: React.FC = () => {
   const { fdcId } = useParams<{ fdcId: string }>();
   const navigate = useNavigate();
+  const [favorites, setFavorites] = useState<string[]>([]);
+
+  // const handleFavourite = () => {
+  //   if (!fdcId) return;
+
+  //   setFavorites((prev) => {
+  //     if (prev.includes(fdcId)) {
+  //       return prev.filter((id) => id !== fdcId);
+  //     } else {
+  //       return [...prev, fdcId];
+  //     }
+  //   });
+  // };
+
+  useEffect(() => {
+    const storedFavorites = localStorage.getItem("foodFavorites");
+    if (storedFavorites) {
+      setFavorites(JSON.parse(storedFavorites));
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("foodFavorites", JSON.stringify(favorites));
+  }, [favorites]);
+
+  const handleFavourite = () => {
+    if (!fdcId) return;
+
+    setFavorites((prev) => {
+      if (prev.includes(fdcId)) {
+        return prev.filter((id) => id !== fdcId);
+      } else {
+        return [...prev, fdcId];
+      }
+    });
+  };
+
+  // const handleFavourite = () => {
+  //   if (fdcId) {
+  //     setFavorites(prev => [...prev, fdcId]);
+  //   }
+  // }
+
+  console.log("This item is stored in favourites or not? ", favorites);
 
   const {
     data: food,
@@ -43,7 +87,7 @@ const FoodDetailPage: React.FC = () => {
     staleTime: 5000,
     retry: 1,
   });
-  console.log(food, "food dat a in detail page-----");
+  // console.log(food, "food dat a in detail page-----");
 
   const handleGoBack = () => {
     navigate(-1);
@@ -421,9 +465,12 @@ const FoodDetailPage: React.FC = () => {
           >
             Go Back
           </button>
-          {/* <button className="px-4 py-2 bg-[#2171B5] hover:bg-[#08519C] cursor-pointer rounded-lg text-white font-medium transition">
+          <button
+            onClick={handleFavourite}
+            className="px-4 py-2 bg-[#2171B5] hover:bg-[#08519C] cursor-pointer rounded-lg text-white font-medium transition"
+          >
             Save to Favorites
-          </button> */}
+          </button>
         </div>
       </div>
     </div>
