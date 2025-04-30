@@ -1,17 +1,21 @@
 import { useQuery } from "@tanstack/react-query";
-import { FoodSearchResponsebyQuery } from "../types/Food";
+import { useParams } from "react-router-dom";
 import { useState } from "react";
-import { searchFoodsforLowCarbs } from "../api/foodApi";
+import { searchFoodsforLowCarbs } from "../../api/foodApi";
+import { FoodSearchResponsebyQuery } from "../../types/Food";
 import { Pagination } from "@mui/material";
-import FoodCard from "../components/common/Card";
+import FoodCard from "../../components/common/Card";
 
-interface DietPageProps {
-  pageSize: number;
+interface QueryPageProps {
+  pageSize?: number;
 }
 
-function DietPage({ pageSize = 17 }: DietPageProps) {
-  const [searchTerm] = useState("Diet");
+function QueryPage({ pageSize = 17 }: QueryPageProps) {
+  const { query } = useParams(); 
   const [currentPage, setCurrentPage] = useState(1);
+
+  
+  const searchTerm = query?.replace(/-/g, " ") || "Diet";
 
   const {
     data: food,
@@ -31,9 +35,7 @@ function DietPage({ pageSize = 17 }: DietPageProps) {
     );
   }
 
-  console.log(food, "\ndata-------");
-
-  if (error)
+  if (error) {
     return (
       <div className="flex justify-center items-center p-6 min-h-screen">
         <p className="text-xl text-[#08306b] font-semibold">
@@ -41,6 +43,7 @@ function DietPage({ pageSize = 17 }: DietPageProps) {
         </p>
       </div>
     );
+  }
 
   if (!food) {
     return (
@@ -54,11 +57,16 @@ function DietPage({ pageSize = 17 }: DietPageProps) {
 
   return (
     <div className="sm:px-6 md:px-4 px-4 py-4">
+      <h2 className="text-2xl font-semibold mb-4 text-[#08306b] capitalize flex items-center justify-center">
+        {searchTerm} Foods
+      </h2>
+
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {food.foods.map((food) => (
           <FoodCard key={food.fdcId} food={food} />
         ))}
       </div>
+
       <div className="mt-6 flex justify-center items-center">
         <Pagination
           page={currentPage}
@@ -70,4 +78,4 @@ function DietPage({ pageSize = 17 }: DietPageProps) {
   );
 }
 
-export default DietPage;
+export default QueryPage;

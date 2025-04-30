@@ -1,5 +1,9 @@
 import axios from "axios";
-import { Food, FoodSearchResponse } from "../types/Food";
+import {
+  Food,
+  FoodSearchResponse,
+  FoodSearchResponsebyQuery,
+} from "../types/Food";
 
 const API_KEY = "qcvl1acoah0Lix4Z7HRdVazNrUhfh0bqNP2sPnxS";
 
@@ -57,6 +61,30 @@ export const searchFoods = async (
     currentPage: pageNumber,
     totalPages: Math.ceil(res.data.totalHits / pageSize),
     pageSize,
+  };
+};
+
+export const searchFoodsforLowCarbs = async (
+  query: string,
+  pageNumber = 1,
+  pageSize = 25
+): Promise<FoodSearchResponsebyQuery> => {
+  const res = await axiosInstance.get(`/foods/search?api_key=${API_KEY}`, {
+    params: {
+      query,
+      pageSize,
+      pageNumber,
+    },
+  });
+
+  return {
+    foods: res.data.foods,
+    totalHits: res.data.totalHits,
+    currentPage: pageNumber,
+    totalPages: Math.ceil(res.data.totalHits / pageSize),
+    pageSize,
+    description: res.data.desc,
+    fdcId: res.data.fdcId,
   };
 };
 
