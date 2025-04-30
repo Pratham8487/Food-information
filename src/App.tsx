@@ -7,6 +7,9 @@ import Browse from "./pages/BrowsePage";
 import FoodDetailPage from "./pages/FoodDetails";
 // import Favorites from "./pages/Favorites";
 import AboutUs from "./pages/AboutUsPage";
+import LowCarbs from "./components/common/LowCarbs";
+import DietPage from "./pages/DietPage";
+import WhyHealthyEatingMatters from "./pages/WhyHealthyEatingMatters";
 
 const queryClient = new QueryClient();
 
@@ -20,7 +23,12 @@ function App() {
             <Route path="browse" element={<Browse />} />
             <Route path="/food/:fdcId" element={<FoodDetailPage />} />
             <Route path="about-us" element={<AboutUs />} />
-            {/* <Route path="favorites" element={<Favorites />} /> */}
+            <Route
+              path="/why-eating-healthy-matters"
+              element={<WhyHealthyEatingMatters />}
+            />
+            <Route path="/Low-carbs" element={<LowCarbs pageSize={18} />} />
+            <Route path="/Diet-Foods" element={<DietPage pageSize={18} />} />
             <Route path="*" element={<FileNotFound />} />
           </Route>
         </Routes>

@@ -56,3 +56,16 @@ export interface FoodSearchResponse {
   totalPages: number;
   pageSize: number;
 }
+<<<<<<< Updated upstream
+=======
+
+export interface FoodSearchResponsebyQuery {
+  foods: Food[];
+  totalHits: number;
+  currentPage: number;
+  totalPages: number;
+  pageSize: number;
+  fdcId: number;
+  description: string;
+}
+>>>>>>> Stashed changes
