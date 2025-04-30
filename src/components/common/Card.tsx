@@ -25,15 +25,12 @@ const FoodCard: React.FC<FoodCardProps> = ({ food }) => {
     navigate(`/food/${food.fdcId}`);
   };
 
-  const foodCategoryName = food.foodCategory?.[0]?.description ?? "Uncategorized";
-
+  const foodCategoryName =
+    food.foodCategory?.[0]?.description ?? "Uncategorized";
 
   return (
-    <div
-      className="bg-white shadow-xs rounded-xl overflow-hidden hover:shadow-lg transition duration-300 cursor-pointer"
-      onClick={handleCardClick}
-    >
-      <div className="bg-[#DEEBF7] p-4 border-b border-blue-100">
+    <div className="bg-white shadow-xs rounded-xl overflow-hidden hover:shadow-lg transition duration-300">
+      <div className="bg-[#DEEBF7] p-4 border-b border-blue-100 cursor-pointer" onClick={handleCardClick}>
         <h2 className="text-lg font-bold text-[#08519C] break-normal">
           {food.description}
         </h2>
@@ -45,6 +42,11 @@ const FoodCard: React.FC<FoodCardProps> = ({ food }) => {
           {food.dataType && (
             <span className="ml-2 px-2 py-0.5 bg-[#DEEBF7] rounded-full">
               {food.dataType}
+            </span>
+          )}
+          {food.fdcId && (
+            <span className="px-2 py-0.5 bg-blue-100 rounded-full">
+              ID: {food.fdcId}
             </span>
           )}
         </div>

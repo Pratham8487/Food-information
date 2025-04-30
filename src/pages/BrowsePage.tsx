@@ -15,7 +15,6 @@ const Browse = () => {
     <ErrorBoundary FallbackComponent={ErrorFallback}>
       <div className="p-6 sm:p-4 md:p-4 lg:p-6">
         <FoodSearchAndResults pageSize={12} useInfiniteScroll={true} />
-        {/* <FoodSearchAndResults Page_size={17} /> */}
       </div>
     </ErrorBoundary>
   );

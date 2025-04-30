@@ -1,4 +1,3 @@
-import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { Food } from "../types/Food";
@@ -31,50 +30,6 @@ const getNutrient = (
 const FoodDetailPage: React.FC = () => {
   const { fdcId } = useParams<{ fdcId: string }>();
   const navigate = useNavigate();
-  const [favorites, setFavorites] = useState<string[]>([]);
-
-  // const handleFavourite = () => {
-  //   if (!fdcId) return;
-
-  //   setFavorites((prev) => {
-  //     if (prev.includes(fdcId)) {
-  //       return prev.filter((id) => id !== fdcId);
-  //     } else {
-  //       return [...prev, fdcId];
-  //     }
-  //   });
-  // };
-
-  useEffect(() => {
-    const storedFavorites = localStorage.getItem("foodFavorites");
-    if (storedFavorites) {
-      setFavorites(JSON.parse(storedFavorites));
-    }
-  }, []);
-
-  useEffect(() => {
-    localStorage.setItem("foodFavorites", JSON.stringify(favorites));
-  }, [favorites]);
-
-  const handleFavourite = () => {
-    if (!fdcId) return;
-
-    setFavorites((prev) => {
-      if (prev.includes(fdcId)) {
-        return prev.filter((id) => id !== fdcId);
-      } else {
-        return [...prev, fdcId];
-      }
-    });
-  };
-
-  // const handleFavourite = () => {
-  //   if (fdcId) {
-  //     setFavorites(prev => [...prev, fdcId]);
-  //   }
-  // }
-
-  console.log("This item is stored in favourites or not? ", favorites);
 
   const {
     data: food,
@@ -176,13 +131,13 @@ const FoodDetailPage: React.FC = () => {
           {food.description}
         </h1>
         <div className="flex flex-wrap gap-2 mt-4">
-          {/* {food.foodCategory && (
+          {food.foodCategory && (
             <span className="inline-flex items-center px-3 py-1 bg-[#C6DBEF] text-[#08519C] rounded-full text-sm font-medium">
               {typeof food.foodCategory === "string"
                 ? food.foodCategory
                 : food.description}
             </span>
-          )} */}
+          )}
           {Array.isArray(food.foodCategory) && food.foodCategory.length > 0 && (
             <span className="inline-flex items-center px-3 py-1 bg-[#C6DBEF] text-[#08519C] rounded-full text-sm font-medium">
               {food.foodCategory[0].description} (Code:{" "}
@@ -461,15 +416,9 @@ const FoodDetailPage: React.FC = () => {
         <div className="mt-6 flex justify-end gap-3">
           <button
             onClick={handleGoBack}
-            className="px-4 py-2 bg-gray-200 hover:bg-gray-300 rounded-lg text-gray-800 font-medium transition"
+            className="px-4 py-2 bg-gray-200 hover:bg-gray-300 rounded-lg text-gray-800 font-medium transition cursor-pointer"
           >
             Go Back
-          </button>
-          <button
-            onClick={handleFavourite}
-            className="px-4 py-2 bg-[#2171B5] hover:bg-[#08519C] cursor-pointer rounded-lg text-white font-medium transition"
-          >
-            Save to Favorites
           </button>
         </div>
       </div>

@@ -1,8 +1,10 @@
 import { Facebook, Twitter, Instagram, X, Github, Leaf } from "lucide-react";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 function Footer() {
   const [follow, setFollow] = useState("+Follow");
+  const [Gmail] = useState("https://mail.google.com")
   return (
     <footer className=" text-gray-400 font-medium py-6 px-4 sm:px-6 lg:px-8 mt-auto bg-[#F1F5F9] ">
       <div className="flex flex-col md:flex-row border-b border-gray-300 justify-between items-center py-4  mx-auto px-4">
@@ -54,9 +56,11 @@ function Footer() {
           </h1>
           <p className="mt-4 text-sm">
             For inquiries, please reach out to us at{" "}
-            <span className="text-[#2171B5] hover:underline hover:cursor-pointer">
-              support@care.com
-            </span>
+            <Link to={Gmail} target="_blank" rel="noopener noreferrer">
+              <span className="text-[#2171B5] hover:underline hover:cursor-pointer">
+                support@care.com
+              </span>
+            </Link>
           </p>
         </div>
 
@@ -68,7 +72,9 @@ function Footer() {
           <ul className="gap-2">
             {["About us", "Testimonials", "Blog"].map((items) => (
               <li key={items} className="text-sm  ">
-                <span className="hover:text-[#4292C6] cursor-pointer">{items}</span>
+                <span className="hover:text-[#4292C6] cursor-pointer">
+                  {items}
+                </span>
               </li>
             ))}
           </ul>

@@ -2,9 +2,7 @@ import { Link } from "react-router-dom";
 
 interface InfoSectionProps {
   title?: string;
-  //   description?: string ||  React.ReactNode;
   description?: React.ReactNode;
-
   items?: string[];
   link?: { href: string; text: string };
 }

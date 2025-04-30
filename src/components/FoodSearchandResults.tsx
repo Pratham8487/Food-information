@@ -173,15 +173,18 @@ const FoodSearchAndResults = ({
 
   if (isPending) {
     return (
-      <div className="bg-white shadow-xs rounded-xl overflow-hidden p-4">
-        <Skeleton height={24} width="70%" className="mb-2" />
-        <Skeleton height={18} width="40%" className="mb-2" />
-        <Skeleton height={18} width="30%" className="mb-4" />
-        <Skeleton count={2} height={16} className="mb-2" />
-        <div className="grid grid-cols-3 gap-2 mt-4">
-          <Skeleton height={50} />
-          <Skeleton height={50} />
-          <Skeleton height={50} />
+      <div className="p-4">
+        <h1 className="text-2xl font-bold mb-4">
+          <Skeleton width={300} />
+        </h1>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {Array.from({ length: 6 }).map((_, index) => (
+            <div key={index} className="bg-white shadow-xs rounded-xl p-4">
+              <Skeleton height={200} className="mb-4 rounded-md" />
+              <Skeleton width={`80%`} height={20} className="mb-2" />
+              <Skeleton width={`60%`} height={16} />
+            </div>
+          ))}
         </div>
       </div>
     );
