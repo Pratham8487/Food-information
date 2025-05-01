@@ -192,8 +192,11 @@ const FoodSearchAndResults = ({
 
   if (error)
     return (
-      <div className="flex justify-center p-8 text-red-500">
-        Error fetching data
+      <div className="flex flex-col text-4xl items-center justify-center p-8 text-red-500 min-h-screen">
+        <p className="text-[#08519C] animate-bounce ">
+          <span className="text-[#0830B6]">Oops!</span> Internal Server Error...
+        </p>
+        <p className="text-[#0830B6] animate-bounce">ReLoad the Page...</p>
       </div>
     );
   if (!currentData)
@@ -202,9 +205,7 @@ const FoodSearchAndResults = ({
   return (
     <div className="sm:p-3 md:p-3">
       <div>
-        <h1 className="md:text-5xl py-3 sm:text-xl font-bold text-primary mb-4 flex items-center justify-center text-4xl">
-          Search Food and Browse
-        </h1>
+        <h1 className="md:text-5xl py-3 sm:text-xl font-bold text-primary mb-4 flex items-center justify-center text-4xl">Search Food and Browse</h1>
         <div className="px-10 py-2 flex items-center justify-center">
           <div className="relative w-full max-w-xl">
             <div className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-500">
@@ -289,12 +290,12 @@ const FoodSearchAndResults = ({
                     ? searchResultsInfiniteQuery.hasNextPage
                     : allFoodsInfiniteQuery.hasNextPage
                 ) ? (
-                <p className="text-xl text-[#08306b] font-semibold transition ease-in duration-300">
+                <p className="text-2xl text-[#08306b] font-semibold transition ease-in duration-300 animate-bounce">
                   Loading More...
                 </p>
               ) : (
-                <p className="text-xl text-[#08306b] font-semibold transition ease-in duration-300">
-                  Nothing More to Load...
+                <p className="text-2xl text-[#08306b] font-semibold transition ease-in duration-300 animate-bounce">
+                  All Caught Up... 🎉
                 </p>
               )}
             </div>

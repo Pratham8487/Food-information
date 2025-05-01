@@ -20,7 +20,7 @@ export interface Food {
     unitName: string;
     value: number;
   }>;
-  ndbNumber?:number;
+  ndbNumber?: number;
   isHistoricalReference?: boolean;
   finalFoodInputFoods?: Array<{
     gramWeight: number;
@@ -35,6 +35,14 @@ export interface Food {
     id?: number;
     gramWeight?: number;
   }>;
+  foodUpdateLog?: Array<{
+    availabeDate?: string;
+    brandedFoodCategory?: string;
+    dataSource?: string;
+    marketCountry?: string;
+    householdServingFullText?: string;
+  }>;
+  packageWeight?: string;
   foodAttributes?: any[];
   foodClass?: string;
   startDate?: any;
@@ -47,6 +55,13 @@ export interface Food {
   ingredients?: string;
   servingSize?: number;
   servingSizeUnit?: string;
+  subbrandName?: string;
+  gtinUpc?: string;
+  brandedFoodCategory?: string;
+  labelNutrients?: Array<{
+    carbohydrates:string;
+    cholesterol?: number;
+  }>
 }
 
 export interface FoodSearchResponse {

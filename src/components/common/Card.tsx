@@ -29,7 +29,7 @@ const FoodCard: React.FC<FoodCardProps> = ({ food }) => {
     food.foodCategory?.[0]?.description ?? "Uncategorized";
 
   return (
-    <div className="bg-white shadow-xs rounded-xl overflow-hidden hover:shadow-lg transition duration-300">
+    <div className="bg-white shadow-xs rounded-xl overflow-hidden hover:shadow-lg transition duration-300 ">
       <div className="bg-[#DEEBF7] p-4 border-b border-blue-100 cursor-pointer" onClick={handleCardClick}>
         <h2 className="text-lg font-bold text-[#08519C] break-normal">
           {food.description}

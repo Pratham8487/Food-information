@@ -42,7 +42,7 @@ const FoodDetailPage: React.FC = () => {
     staleTime: 5000,
     retry: 1,
   });
-  // console.log(food, "food dat a in detail page-----");
+  console.log(food, "food dat a in detail page-----");
 
   const handleGoBack = () => {
     navigate(-1);
@@ -120,7 +120,11 @@ const FoodDetailPage: React.FC = () => {
     });
   });
 
-  // console.log(food.foodCategory[0],"foodcategory--------")
+  // const foodUpdateLog: Record<string, {name?: string; value: string }[]> = {};
+
+  // food.foodUpdateLog?.forEach((log) => {
+  //   const Name = log.foodUpdateLo
+  // })
 
   const hasNutritionData = food.foodNutrients && food.foodNutrients.length > 0;
 
@@ -156,6 +160,12 @@ const FoodDetailPage: React.FC = () => {
               ID: {food.fdcId}
             </span>
           )}
+          {food.gtinUpc && (
+            <span className="inline-flex items-center px-3 py-1 bg-[#C6DBEF] text-[#08519C] rounded-full text-sm font-medium">
+              gtinUpc: {food.gtinUpc}
+            </span>
+          )}
+
           {food.ndbNumber && (
             <span className="inline-flex items-center px-3 py-1 bg-[#C6DBEF] text-[#08519C] rounded-full text-sm font-medium">
               ndbNumber: {food.ndbNumber}
@@ -188,16 +198,29 @@ const FoodDetailPage: React.FC = () => {
                   <Award size={18} className="mt-1 mr-2 text-gray-500" />
                   <div>
                     <p className="text-sm text-gray-500">Brand Owner</p>
-                    <p className="font-medium">{food.brandOwner}</p>
+                    <p className="font-medium">
+                      {food.brandOwner}
+                      {food.foodUpdateLog && (
+                        <p className="text-xs text-gray-400">
+                          ({food.foodUpdateLog[0].marketCountry})
+                        </p>
+                      )}
+                    </p>
                   </div>
                 </div>
               )}
-              {food.brandName && (
+              {food.brandName && food.subbrandName && (
                 <div className="flex items-start">
                   <Bookmark size={18} className="mt-1 mr-2 text-gray-500" />
                   <div>
                     <p className="text-sm text-gray-500">Brand Name</p>
-                    <p className="font-medium">{food.brandName}</p>
+                    <p className="font-medium">
+                      {food.brandName}{" "}
+                      <span className="text-xs font-mono text-gray-700">
+                        ({food.subbrandName})
+                      </span>
+                    </p>
+                    <p className="font-medium text-xs"></p>
                   </div>
                 </div>
               )}
@@ -251,11 +274,14 @@ const FoodDetailPage: React.FC = () => {
                     </p>
                   </div>
                 )}
-              {food.servingSize && (
+              {food.servingSize && food.packageWeight && (
                 <div>
                   <p className="text-sm text-gray-500">Serving Size</p>
                   <p className="font-medium">
-                    {food.servingSize} {food.servingSizeUnit || "g"}
+                    {food.servingSize} {food.servingSizeUnit || "g"}{" "}
+                    <span className="text-xs text-gray-500 font-medium">
+                      ({food.packageWeight})
+                    </span>
                   </p>
                 </div>
               )}
@@ -280,7 +306,23 @@ const FoodDetailPage: React.FC = () => {
               {food.ingredients && (
                 <div>
                   <p className="text-sm text-gray-500">Ingredients</p>
-                  <p className="font-medium text-sm mt-1">{food.ingredients}</p>
+                  <p className="font-medium text-xs mt-1">{food.ingredients}</p>
+                  {food.foodUpdateLog && food.brandedFoodCategory && (
+                    <p className="text-xs font-medium"><br/>
+                      {food.foodUpdateLog[0].householdServingFullText && (
+                        <div>
+                          <span className="text-gray-500 font-mono text-sm">
+                            HouseHold<span className="text-xs">(per person)</span>{" "}
+                          </span>
+                          <p className="text-xs uppercase font-medium">
+                            {food.foodUpdateLog[0].householdServingFullText}
+                          </p>
+                        </div>
+                      )}
+                      {food.foodUpdateLog[0].brandedFoodCategory ||
+                        food.brandedFoodCategory}<br/>
+                    </p>
+                  )}
                 </div>
               )}
               {food.description && (
@@ -291,6 +333,7 @@ const FoodDetailPage: React.FC = () => {
                   </p>
                 </div>
               )}
+
               {food.startDate && food.endDate && food.publicationDate && (
                 <div>
                   <p className="font-normal text-gray-600 font-mono text-sm mt-1">
