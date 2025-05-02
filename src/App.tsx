@@ -8,6 +8,7 @@ import FoodDetailPage from "./pages/FoodDetails";
 import AboutUs from "./pages/AboutUsPage";
 import DietPage from "./components/common/QueryResult";
 import WhyHealthyEatingMatters from "./pages/WhyHealthyEatingMatters";
+import Portfolio from "./components/common/Portfolio";
 
 const queryClient = new QueryClient();
 
@@ -21,6 +22,7 @@ function App() {
             <Route path="browse" element={<Browse />} />
             <Route path="/food/:fdcId" element={<FoodDetailPage />} />
             <Route path="about-us" element={<AboutUs />} />
+            <Route path="portfolio" element={<Portfolio />} />
             <Route
               path="/why-eating-healthy-matters"
               element={<WhyHealthyEatingMatters />}
