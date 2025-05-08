@@ -121,7 +121,7 @@ const FoodSearchAndResults = ({
       } else {
         setIsSearching(false);
       }
-    }, 1000);
+    }, 1900);
   };
 
   useEffect(() => {
@@ -205,7 +205,9 @@ const FoodSearchAndResults = ({
   return (
     <div className="sm:p-3 md:p-3">
       <div>
-        <h1 className="md:text-5xl py-3 sm:text-xl font-bold text-primary mb-4 flex items-center justify-center text-4xl">Search Food and Browse</h1>
+        <h1 className="text-3xl sm:text-xl md:text-4xl py-3 font-bold text-center w-full text-preety animate-bounce sm:animate-none text-gray-700 sm:text-gray-800">
+          Search Food and Browse
+        </h1>
         <div className="px-10 py-2 flex items-center justify-center">
           <div className="relative w-full max-w-xl">
             <div className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-500">
@@ -224,6 +226,7 @@ const FoodSearchAndResults = ({
                   height: "56px",
                   paddingLeft: "48px",
                   borderRadius: "0.75rem",
+                  borderColor: "#adb5bd",
                 },
                 endAdornment: isTyping && (
                   <div className="text-sm text-gray-500 mr-2">Typing...</div>
@@ -282,9 +285,20 @@ const FoodSearchAndResults = ({
                 ? searchResultsInfiniteQuery
                 : allFoodsInfiniteQuery
               ).isFetchingNextPage ? (
-                <p className="text-xl text-[#08306b] font-semibold">
-                  Loading More...
-                </p>
+                <div className="p-4 w-full">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                    {Array.from({ length: 6 }).map((_, index) => (
+                      <div
+                        key={index}
+                        className="bg-white shadow-xs rounded-xl p-4"
+                      >
+                        <Skeleton height={200} className="mb-4 rounded-md" />
+                        <Skeleton width={`80%`} height={20} className="mb-2" />
+                        <Skeleton width={`60%`} height={16} />
+                      </div>
+                    ))}
+                  </div>
+                </div>
               ) : (
                   isSearching
                     ? searchResultsInfiniteQuery.hasNextPage

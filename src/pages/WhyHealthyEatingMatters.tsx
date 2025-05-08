@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import InfoSection from "../components/common/InfoSection";
 import YouTubeVideo from "../components/common/YoutubeVideo";
+import ScrollToTopButton from "../components/common/ScrollToTopButton";
 
 export default function WhyHealthyEatingMatters() {
   return (
@@ -245,6 +246,8 @@ export default function WhyHealthyEatingMatters() {
           text: "Learn More on Healthline",
         }}
       />
+
+      <ScrollToTopButton />
     </div>
   );
 }

@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import InfoSection from "../components/common/InfoSection";
+import ScrollToTopButton from "../components/common/ScrollToTopButton";
 
 const AboutPage = () => {
   const usdawebsite = "https://fdc.nal.usda.gov/";
@@ -85,6 +86,7 @@ const AboutPage = () => {
           </>
         }
       />
+      <ScrollToTopButton />
     </div>
   );
 };

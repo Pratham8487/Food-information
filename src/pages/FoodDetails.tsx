@@ -10,6 +10,9 @@ import {
   Award,
   Bookmark,
 } from "lucide-react";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
+import ScrollToTopButton from "../components/common/ScrollToTopButton";
 import { getFoodById } from "../api/foodApi";
 
 const getNutrient = (
@@ -59,11 +62,63 @@ const FoodDetailPage: React.FC = () => {
 
   if (isLoading) {
     return (
-      <div className="flex justify-center items-center min-h-screen">
-        <div className="text-center">
-          <p className="text-xl text-[#08306b] font-semibold">
-            Loading Details...
-          </p>
+      <div className="max-w-4xl mx-auto py-12 border border-gray-200">
+        <div className="bg-[#DEEBF7] p-6 rounded-b-xl shadow-sm">
+          <h1 className="text-2xl font-bold mb-4">
+            <Skeleton width={150} />
+          </h1>
+          <div className="flex flex-wrap gap-5 mt-4">
+            <Skeleton
+              className="inline-flex items-center px-3 py-1 bg-[#C6DBEF] text-[#08519C] rounded-full text-sm font-medium "
+              width={80}
+            />
+            <Skeleton
+              className="inline-flex items-center px-3 py-1 bg-[#C6DBEF] text-[#08519C] rounded-full text-sm font-medium "
+              width={80}
+            />
+            <Skeleton
+              className="inline-flex items-center px-3 py-1 bg-[#C6DBEF] text-[#08519C] rounded-full text-sm font-medium "
+              width={80}
+            />
+            <Skeleton
+              className="inline-flex items-center px-3 py-1 bg-[#C6DBEF] text-[#08519C] rounded-full text-sm font-medium "
+              width={80}
+            />
+          </div>
+        </div>
+        <div className="p-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+            {Array.from({ length: 2 }).map((_, index) => (
+              <div key={index} className="bg-white shadow-xs rounded-xl p-4">
+                <Skeleton height={100} className="mb-4 rounded-md" />
+                <Skeleton width={`60%`} height={8} />
+              </div>
+            ))}
+          </div>
+          <div className="bg-[#DEEBF7] rounded-lg p-4 shadow-sm">
+            <h2 className="text-lg font-semibold text-[#08519C] mb-4">
+              <Skeleton width={150} />
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6 mb-6">
+              {Array.from({ length: 8 }).map((_, index) => (
+                <div key={index} className="bg-white shadow-xs rounded-xl p-4">
+                  <Skeleton
+                    height={10}
+                    className="mb-4 rounded-md"
+                    width={40}
+                  />
+                  <Skeleton width={`60%`} height={16} />
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <div className="mt-6 flex justify-end gap-3 pr-8">
+          <Skeleton
+            className="px-4 py-2 bg-gray-200 hover:bg-gray-300 rounded-lg text-gray-800 font-medium transition cursor-pointer"
+            width={80}
+          />
         </div>
       </div>
     );
@@ -143,7 +198,7 @@ const FoodDetailPage: React.FC = () => {
             </span>
           )}
           {Array.isArray(food.foodCategory) && food.foodCategory.length > 0 && (
-            <span className="inline-flex items-center px-3 py-1 bg-[#C6DBEF] text-[#08519C] rounded-full text-sm font-medium">
+            <span className="inline-flex items-center px-3 py-1 bg-[#C6DBEF] text-[#08519C] rounded-full text-sm font-medium ">
               {food.foodCategory[0].description} (Code:{" "}
               {food.foodCategory[0].code}, ID: {food.foodCategory[0].id})
               <p>foodcategory section</p>
@@ -308,11 +363,13 @@ const FoodDetailPage: React.FC = () => {
                   <p className="text-sm text-gray-500">Ingredients</p>
                   <p className="font-medium text-xs mt-1">{food.ingredients}</p>
                   {food.foodUpdateLog && food.brandedFoodCategory && (
-                    <p className="text-xs font-medium"><br/>
+                    <p className="text-xs font-medium">
+                      <br />
                       {food.foodUpdateLog[0].householdServingFullText && (
                         <div>
                           <span className="text-gray-500 font-mono text-sm">
-                            HouseHold<span className="text-xs">(per person)</span>{" "}
+                            HouseHold
+                            <span className="text-xs">(per person)</span>{" "}
                           </span>
                           <p className="text-xs uppercase font-medium">
                             {food.foodUpdateLog[0].householdServingFullText}
@@ -320,7 +377,8 @@ const FoodDetailPage: React.FC = () => {
                         </div>
                       )}
                       {food.foodUpdateLog[0].brandedFoodCategory ||
-                        food.brandedFoodCategory}<br/>
+                        food.brandedFoodCategory}
+                      <br />
                     </p>
                   )}
                 </div>
@@ -465,6 +523,7 @@ const FoodDetailPage: React.FC = () => {
           </button>
         </div>
       </div>
+      <ScrollToTopButton />
     </div>
   );
 };

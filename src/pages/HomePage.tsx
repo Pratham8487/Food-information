@@ -1,6 +1,7 @@
 import HeroSection from "../components/common/HeroSection";
 import FoodSearchAndResults from "../components/FoodSearchandResults";
 import { ErrorBoundary } from "react-error-boundary";
+import ScrollToTopButton from "../components/common/ScrollToTopButton";
 
 const ErrorFallback = () => {
   return (
@@ -17,6 +18,7 @@ const HomePage = () => {
       <HeroSection />
       <ErrorBoundary FallbackComponent={ErrorFallback}>
         <FoodSearchAndResults pageSize={12} useInfiniteScroll={false} />
+        <ScrollToTopButton/>
       </ErrorBoundary>
     </div>
   );
